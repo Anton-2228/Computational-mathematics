@@ -1,11 +1,18 @@
 import os
+import sys
+
 
 def main(dim, nums, eps):
     ret = diag_matr(dim, nums)
     nums = ret[0]
     d = ret[1]
     res = ret[2]
-    #print(nums)
+
+    res_lin = check_lin(dim, nums)
+
+    if res_lin:
+        print("Матрица линейно зависима, а значит существует бесконечное число решений, следовательно данный метод не применим.")
+        sys.exit()
 
     if not res:
         print("Для данной матрицы условие преобладания диагональных элементов не выполняется, а значит сходимость не гарантированна. Будет проведено 100 итераций. Если в результате не будет достигнута заданная точность, значит найти решение таким методом невозможно.")
@@ -46,34 +53,44 @@ def main(dim, nums, eps):
         if max(dif_apr) < eps:
             break
         apr = next_apr.copy()
-        #print(apr)
-        #print(next_apr)
-    #print(len(res_table))
-    #print(res_table)
     if len(res_table) == 102:
         print("Метод не сходится")
     else:
         col_width = []
         for i in range(len(res_table[0])):
             ma = 0
-            #print(res_table)
             for z in res_table:
                 if len(str(z[i])) > ma:
                     ma = len(str(z[i]))
             col_width.append(ma+4)
         col_width.append(0)
-        #print(len(col_width))
         for i in res_table:
-            #print(range(len(i)))
-            #print("".join(str(z) for z in range(len(i))))
             print("".join(i[z].ljust(col_width[z]) for z in range(len(i))))
 
-    #for i in coef:
-    #    print(i)
 #2 2 10 14
 #10 1 1 12
 #2 10 1 13
 
+
+def check_lin(dim, nums):
+    res = False
+    for i in range(len(nums)):
+        k = 0
+        loc_res = True
+        for z in range(i+1, len(nums)):
+            for l in range(len(nums[i])):
+                if k == 0:
+                    k = nums[i][l]/nums[z][l]
+                else:
+                    if nums[i][l]/nums[z][l] != k:
+                        loc_res = False
+                        break
+            if loc_res:
+                res = True
+                break
+        if loc_res:
+            break
+    return res
 
 def diag_matr(dim, nums):
     d = []
@@ -181,8 +198,6 @@ def enter_path():
             continue
         break
     return pa
-
-#def get_n():
 
 
 def data_entry():
