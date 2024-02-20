@@ -42,17 +42,27 @@ def main(dim, nums, eps):
         next_apr = []
         res_table.append([])
         for i in range(dim):
-            next_apr.append(round(sum((
+            next_apr.append(sum((
                 coef[i][x]*apr[x] for x in range(dim)
-            )) + d[i], 4))
-        dif_apr = [round(abs(next_apr[x]-apr[x]), 4) for x in range(dim)]
+            )) + d[i])
+        dif_apr = [abs(next_apr[x]-apr[x]) for x in range(dim)]
+        rr = False
+        if max(dif_apr) < eps:
+            rr = True
+            #break
+        apr = next_apr.copy()
+        # for i in range(dim):
+        #     next_apr[i] = round(next_apr[i], 12)
+        # for i in range(dim):
+        #     dif_apr[i] = round(dif_apr[i], 12)
         res_table[k+2].append(str(k+1))
         res_table[k+2] += list(map(str, next_apr))
         res_table[k+2] += list(map(str, dif_apr))
         res_table[k+2].append(str(max(dif_apr)))
-        if max(dif_apr) < eps:
+
+        if rr:
             break
-        apr = next_apr.copy()
+
     if len(res_table) == 102:
         print("Метод не сходится")
     else:
@@ -67,24 +77,27 @@ def main(dim, nums, eps):
         for i in res_table:
             print("".join(i[z].ljust(col_width[z]) for z in range(len(i))))
 
-#2 2 10 14
-#10 1 1 12
-#2 10 1 13
-
-
 def check_lin(dim, nums):
     res = False
     for i in range(len(nums)):
-        k = 0
         loc_res = True
         for z in range(i+1, len(nums)):
+            k = ""
             for l in range(len(nums[i])):
-                if k == 0:
-                    k = nums[i][l]/nums[z][l]
-                else:
-                    if nums[i][l]/nums[z][l] != k:
+                try:
+                    if k == "":
+                        k = nums[i][l]/nums[z][l]
+                    else:
+                        if nums[i][l]/nums[z][l] != k:
+                            loc_res = False
+                            break
+                except:
+                    if k == "":
+                        k = " "
+                    elif k != " ":
                         loc_res = False
                         break
+                    continue
             if loc_res:
                 res = True
                 break
@@ -176,7 +189,7 @@ def enter_coef_line(n):
         err = []
         for i in line:
             try:
-                int(i)
+                float(i)
             except:
                 err.append(i)
         if len(err) != 0:
@@ -208,7 +221,7 @@ def data_entry():
         eps = enter_eps()
         print("Вводите коэффициенты построчно через пробел. Свободный член вводите самым правым элементом:")
         for i in range(n):
-            nums.append(list(map(int, enter_coef_line(n))))
+            nums.append(list(map(float, enter_coef_line(n))))
         main(n, nums, eps)
     elif var == "2":
         pa = enter_path()
@@ -229,7 +242,7 @@ def data_entry():
                 err_line = l
             for i in range(n):
                 l = file.readline()
-                nums.append(list(map(int, l.split())))
+                nums.append(list(map(float, l.split())))
         except:
             res = False
             err_line = l
