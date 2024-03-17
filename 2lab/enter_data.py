@@ -59,7 +59,9 @@ def enter_num_func(funcs):
 def enter_num_system_func(system_funcs):
     print("Введите номер функции, которую будем считать:\n"
           "0: sin(x+y) - 1.2x = 0.2\n"
-          "   x^2 + 2y^2 = 1")
+          "   x^2 + 2y^2 = 1\n"
+          "1: x^2 + y^2 = 4\n"
+          "   y = 3*x^2")
     while True:
         ent = input()
         try:
@@ -68,7 +70,7 @@ def enter_num_system_func(system_funcs):
             print("Введенная строка не является числом\n"
                   "Повторите ввод:")
             continue
-        if num != 0 and num != 1 and num != 2:
+        if num != 0 and num != 1:
             print("Введенное число не является 0, 1\n"
                   "Повторите ввод:")
             continue

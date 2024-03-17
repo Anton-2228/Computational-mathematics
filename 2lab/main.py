@@ -139,9 +139,10 @@ def newton(num_func, start_aprox, eps):
         table[-1].append(str(step))
         ma = system_funcs[num_func](xs[-1], ys[-1])
         #apr = matr(ma[0], ma[1], 0.01)
-        left_side = np.array([ma[1][0][:-1], ma[1][1][:-1]])
-        right_side = np.array([ma[1][0][-1], ma[1][1][-1]])
-        apr = np.linalg.inv(left_side).dot(right_side)
+        #left_side = np.array([ma[1][0][:-1], ma[1][1][:-1]])
+        #right_side = np.array([ma[1][0][-1], ma[1][1][-1]])
+        #apr = np.linalg.inv(left_side).dot(right_side)
+        apr = ma.copy()
         x = xs[-1] + apr[0]
         y = ys[-1] + apr[1]
         table[-1].append(str(xs[-1]))
@@ -181,7 +182,7 @@ def data_entry():
         secant(num_func, scope.copy(), eps)
         simple_iter(num_func, scope.copy(), eps)
 
-        graph(scope, num_func, eps, ans)
+        # graph(scope, num_func, eps, ans)
 
     elif type == 1:
         num_func = enter_num_system_func(system_funcs)
@@ -190,18 +191,18 @@ def data_entry():
 
         newton(num_func, start_aprox, eps)
 
-def graph(scope, num_func, eps, ans):
-    t = np.arange(scope[0]-scope[0]/4, scope[1] + scope[1]/4, eps)
-    y = funcs[num_func](t)
-    x1 = float(ans[0])
-    y1 = funcs[num_func](float(x1))
-    plt.scatter(x1, y1, color="red")
-    plt.hlines(y=0, xmin=scope[0]-scope[0]/4, xmax=scope[1] + scope[1]/4, color="green")
-    plt.plot(t, y, color="black")
-    plt.show()
+# def graph(scope, num_func, eps, ans):
+#     t = np.arange(scope[0]-scope[0]/4, scope[1] + scope[1]/4, eps)
+#     y = funcs[num_func](t)
+#     x1 = float(ans[0])
+#     y1 = funcs[num_func](float(x1))
+#     plt.scatter(x1, y1, color="red")
+#     plt.hlines(y=0, xmin=scope[0]-scope[0]/4, xmax=scope[1] + scope[1]/4, color="green")
+#     plt.plot(t, y, color="black")
+#     plt.show()
 
-def system_graph(num_func, eps):
-    pass
+# def system_graph(num_func, eps):
+#     pass
 
 if __name__ == "__main__":
     data_entry()
