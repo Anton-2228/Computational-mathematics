@@ -25,7 +25,9 @@ def chord(num_func, scope, eps):
         if funcs[num_func](scope[0]) * y < 0:
             scope[1] = x
         elif funcs[num_func](scope[1]) * y < 0:
-            scope[0] = x
+            #scope[0] = x
+            scope[0] = scope[1]
+            scope[1] = x
         table[-1].append(str(funcs[num_func](scope[0])))
         table[-1].append(str(funcs[num_func](scope[1])))
         table[-1].append(str(y))
@@ -90,10 +92,21 @@ def secant(num_func, scope, eps):
 
 def simple_iter(num_func, scope, eps):
     table = [["№ итерации", "xk", "xk+1", "f(xk+1)", "|xk+1 - xk|"]]
-    if deriv_funcs[num_func]((scope[0] + scope[1]) / 2) > 0:
+    #if deriv_funcs[num_func]((scope[0] + scope[1]) / 2) < 0:
+    if deriv_funcs[num_func](scope[0]) < 0:
         lamb = -1 / max(deriv_funcs[num_func](scope[0]), deriv_funcs[num_func](scope[1]))
     else:
         lamb = 1 / max(deriv_funcs[num_func](scope[0]), deriv_funcs[num_func](scope[1]))
+
+    der = abs(deriv_funcs[num_func](scope[0]) * lamb +1)
+    if der >= 2:
+        print("Условие сходимости для метода простых итераций не выполняется")
+        return
+    der = abs(deriv_funcs[num_func](scope[1]) * lamb + 1)
+    if der >= 2:
+        print("Условие сходимости для метода простых итераций не выполняется")
+        return
+
     xs = []
     if deriv_funcs[num_func](scope[0]) > deriv_funcs[num_func](scope[1]):
         xs.append(scope[0])
