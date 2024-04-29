@@ -1,6 +1,7 @@
 import os
 import sys
 
+an = open("lab1_test_result.txt", "w")
 
 def main(dim, nums, eps):
     ret = diag_matr(dim, nums)
@@ -12,10 +13,14 @@ def main(dim, nums, eps):
 
     if res_lin:
         print("Матрица линейно зависима, а значит существует бесконечное число решений, следовательно данный метод не применим.")
+        an.write("0")
         sys.exit()
 
+    ddd = False
     if not res:
         print("Для данной матрицы условие преобладания диагональных элементов не выполняется, а значит сходимость не гарантированна. Будет проведено 100 итераций. Если в результате не будет достигнута заданная точность, значит найти решение таким методом невозможно.")
+        ddd = True
+        an.write("1")
 
     coef = []
     for i in range(dim):
@@ -76,6 +81,10 @@ def main(dim, nums, eps):
         col_width.append(0)
         for i in res_table:
             print("".join(i[z].ljust(col_width[z]) for z in range(len(i))))
+
+    if not ddd:
+        for i in res_table[-1][1:]:
+            an.write(i + " ")
 
 def check_lin(dim, nums):
     res = False
