@@ -30,7 +30,6 @@ def chord(num_func, scope, eps):
             scope[0] = x
             # scope[0] = scope[1]
             # scope[1] = x
-        print(scope)
         table[-1].append(str(funcs[num_func](scope[0])))
         table[-1].append(str(funcs[num_func](scope[1])))
         table[-1].append(str(y))
@@ -209,20 +208,6 @@ def data_entry():
         eps = enter_eps()
 
         newton(num_func, start_aprox, eps)
-
-
-# def graph(scope, num_func, eps, ans):
-#     t = np.arange(scope[0]-scope[0]/4, scope[1] + scope[1]/4, eps)
-#     y = funcs[num_func](t)
-#     x1 = float(ans[0])
-#     y1 = funcs[num_func](float(x1))
-#     plt.scatter(x1, y1, color="red")
-#     plt.hlines(y=0, xmin=scope[0]-scope[0]/4, xmax=scope[1] + scope[1]/4, color="green")
-#     plt.plot(t, y, color="black")
-#     plt.show()
-
-# def system_graph(num_func, eps):
-#     pass
 
 if __name__ == "__main__":
     data_entry()

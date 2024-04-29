@@ -97,7 +97,7 @@ def simpson_method(data):
             if (ans[len(ans) // 2] - ans[-1]) / 15 < eps:
                 break
         n += 1
-    print(ans)
+    #print(ans)
     if i == 19999:
         print("Найти интеграл методом Симпсона с заданной точносью не вышло:(")
         return

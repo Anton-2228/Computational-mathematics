@@ -1,7 +1,8 @@
 from math import tan, sin, cos
 
 def func1(x):
-    return x**3-0.5*x**2+0.6
+    return 2*x**3 + 3.41*x**2 - 23.74*x + 2.95
+    # return x**3-0.5*x**2+0.6
     #return 3*x**3 + 1.7*x**2 - 15.42*x + 6.89
 
 def func2(x):
@@ -11,7 +12,8 @@ def func3(x):
     return x**3 - 2.56*x**2 - 1.325*x + 4.395
 
 def deriv_func1(x):
-    return 9*x**2 + (17/5)*x - 771/50
+    return 6*x**2 + 6.82*x - 23.74
+    # return 9*x**2 + (17/5)*x - 771/50
 
 def deriv_func2(x):
     return -3*x**2 + (567/50)*x - 178/25
@@ -20,7 +22,8 @@ def deriv_func3(x):
     return 3*x**2 - (128/25)*x - 53/40
 
 def deriv_deriv_func1(x):
-    return 18*x + 17/5
+    return 12*x + 6.82
+    # return 18*x + 17/5
 
 def deriv_deriv_func2(x):
     return -6*x + 567/50
@@ -29,21 +32,6 @@ def deriv_deriv_func3(x):
     return 6*x - 128/25
 
 def system_func1(x, y):
-    #nums = []
-    #nums.append([])
-    #nums[-1].append(cos(x+y) - 6/5)
-    #nums[-1].append(cos(x+y))
-    ##nums[-1].append(sin(x+y) - 1.2*x - 0.2)
-    #nums[-1].append(-sin(x+y) + 1.2*x + 0.2)
-
-    #nums.append([])
-    #nums[-1].append(2*x)
-    #nums[-1].append(4*y)
-    ##nums[-1].append(x**2 + 2*y**2 - 1)
-    #nums[-1].append(-x**2 - 2*y**2 + 1)
-
-    #return [2, nums]
-
     if x == 0:
         x += 1
     if y == 0:
@@ -54,18 +42,6 @@ def system_func1(x, y):
     return [dx, dy]
 
 def system_func2(x, y):
-    # nums = []
-    # nums.append([])
-    # nums[-1].append(2*x)
-    # nums[-1].append(2*y)
-    # nums[-1].append(-x**2 - y**2 + 4)
-    #
-    # nums.append([])
-    # nums[-1].append(-6*x)
-    # nums[-1].append(1)
-    # nums[-1].append(3*x**2 - y)
-    #
-    # return [2, nums]
     if x == 0:
         x += 1
     if y == 0:
