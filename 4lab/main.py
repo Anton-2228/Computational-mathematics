@@ -226,6 +226,7 @@ def loga(xs, ys):
     xs.pop(0)
     try:
         XS = list(map(log, xs))
+        # XS = list(map(exp, xs))
     except:
         print("Для логарифмической аппроксимации не должно быть отрицательных значений x")
         return

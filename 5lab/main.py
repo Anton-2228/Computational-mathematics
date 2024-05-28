@@ -109,8 +109,8 @@ def main():
     newton_razn(xs, ys, point)
     newton_ravn(xs, ys, point)
 
-    # plt.plot(xx, yy)
-    # plt.show()
+    plt.plot(xx, yy)
+    plt.show()
 
 if __name__ == "__main__":
     main()

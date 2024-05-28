@@ -1,5 +1,6 @@
 def func1(x):
-    return 2*x**2 + 8*x
+    return x**3/3
+    # return 2*x**2 + 8*x
     #return x**2+4*x+12
 
 def func2(x):
